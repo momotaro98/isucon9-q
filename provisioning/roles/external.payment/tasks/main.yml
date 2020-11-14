@@ -1,0 +1,18 @@
+- name: Install payment
+  command: /home/isucon/local/go/bin/go build -o bin/payment cmd/payment/main.go
+  args:
+    chdir: /home/isucon/isucari
+  environment:
+    GO111MODULE: "on"
+  become: yes
+  become_user: isucon
+
+- name: Copy payment.golang unit file
+  copy:
+    src: etc/systemd/system/payment.service
+    dest: /etc/systemd/system/payment.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - daemon-reload

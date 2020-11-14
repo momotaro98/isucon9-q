@@ -1,0 +1,48 @@
+- name: Create Directory for TLS Certificate and Key
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Copy TLS Certificate and Key
+  copy:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src }}"
+    owner: root
+    group: root
+    mode: 0700
+  with_items:
+    - { dest: "/etc/nginx/ssl/fullchain.pem",    src: "certs/isucon9q.catatsuy.org/fullchain.pem" }
+    - { dest: "/etc/nginx/ssl/privkey.pem", src: "certs/isucon9q.catatsuy.org/privkey.pem" }
+
+- name: Copy Nginx config
+  copy:
+    src: etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy external Nginx config
+  copy:
+    src: etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-available/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - external-shipment.conf
+    - external-payment.conf
+
+- name: Enable external config
+  file:
+    path: /etc/nginx/sites-enabled/{{ item }}
+    src: /etc/nginx/sites-available/{{ item }}
+    state: link
+  with_items:
+    - external-shipment.conf
+    - external-payment.conf
+  notify:
+    - reload nginx

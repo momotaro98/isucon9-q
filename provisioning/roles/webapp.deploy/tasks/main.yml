@@ -1,0 +1,23 @@
+- name: Create isucari directory
+  become: yes
+  become_user: isucon
+  file:
+    path=/home/isucon/isucari
+    state=directory
+
+- name: Deploy isucari
+  become: yes
+  synchronize:
+    src: ../../../../webapp/
+    dest: /home/isucon/isucari/webapp
+    delete: yes
+    recursive: yes
+
+- name: Chown isucon
+  become: yes
+  file:
+    dest: /home/isucon/isucari
+    owner: isucon
+    group: isucon
+    mode: 0755
+    recurse: yes

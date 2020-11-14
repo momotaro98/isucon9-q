@@ -1,0 +1,18 @@
+- name: Install shipment
+  command: /home/isucon/local/go/bin/go build -o bin/shipment cmd/shipment/main.go
+  args:
+    chdir: /home/isucon/isucari
+  environment:
+    GO111MODULE: "on"
+  become: yes
+  become_user: isucon
+
+- name: Copy shipment.golang unit file
+  copy:
+    src: etc/systemd/system/shipment.service
+    dest: /etc/systemd/system/shipment.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - daemon-reload

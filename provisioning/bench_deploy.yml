@@ -1,0 +1,25 @@
+- hosts: bench
+  user: root
+  gather_facts: yes
+
+  roles:
+    - external.deploy
+
+    - kernel-tune
+    - nginx.log-format
+    - external.nginx
+    - external.benchmarker
+    - external.benchmark-worker
+
+  tasks:
+    - name: Start default daemons
+      become: yes
+      become_user: root
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      with_items:
+        - nginx.service
+        - benchmark-worker.service

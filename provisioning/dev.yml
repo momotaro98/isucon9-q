@@ -1,0 +1,31 @@
+- hosts: dev
+  user: root
+  gather_facts: yes
+
+  roles:
+    - user.isucon
+    - bootstrap
+    - aliyun
+    - dev.deploy
+
+    - kernel-tune
+    - nginx
+    - nginx.log-format
+    - golang
+    - external.nginx
+    - external.shipment
+    - external.payment
+
+  tasks:
+    - name: Start default daemons
+      become: yes
+      become_user: root
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      with_items:
+        - nginx.service
+        - shipment.service
+        - payment.service

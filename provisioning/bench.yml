@@ -1,0 +1,31 @@
+- hosts: bench
+  user: root
+  gather_facts: yes
+  vars:
+    golang_version: 1.13
+
+  roles:
+    - user.isucon
+    - bootstrap
+    - aliyun
+    - external.deploy
+
+    - kernel-tune
+    - nginx
+    - nginx.log-format
+    - golang
+    - external.nginx
+    - external.benchmarker
+    - external.benchmark-worker
+
+  tasks:
+    - name: Start default daemons
+      become: yes
+      become_user: root
+      systemd:
+        name: "{{ item }}"
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      with_items:
+        - nginx.service
