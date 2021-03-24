@@ -20,6 +20,6 @@ resource "aws_instance" "participant-instance" {
   }
 
   tags = {
-    Name = "isucon"
+    Name = format("isucon-%s", lookup(var.names, count.index))
   }
 }
