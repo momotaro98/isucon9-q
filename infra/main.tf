@@ -32,7 +32,7 @@ module "sg" {
   source = "./modules/security_group"
   name = "isucon_sg"
   vpc_id = module.vpc.vpc_id
-  cidr_blocks = var.access_cidr_blocks
+  cidr_blocks = split(",", var.access_cidr_blocks)
 }
 
 module "participant-ec2" {
