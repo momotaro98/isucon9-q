@@ -1,9 +1,9 @@
 source "amazon-ebs" "ubuntu-amd64" {
   # region        = "ap-northeast-1"
   # profile       = "default"
-  profile       = var.profile
+  profile = var.profile
 
-  ami_name      = var.ami_name
+  ami_name        = var.ami_name
   ami_description = var.ami_description
   ami_groups      = var.ami_groups
 
