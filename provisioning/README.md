@@ -2,6 +2,10 @@
 
 ansible 2.8.3のみで動作確認しています。
 
+# momotaro98's note
+
+__PackerがAnsibleをProvisionerとして使ってAMIを作成する__
+
 # playbooks
 
 - webapp.yml
