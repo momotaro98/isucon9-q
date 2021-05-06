@@ -1,8 +1,13 @@
-variable "standalone_ami_id" {
+variable "standalone_ami_name" {
   type = string
-  # default = "ami-02f8f5388a3fb5d30"
-  default = "ami-03b1b78bb1da5122f" # From isucon9-q of https://github.com/matsuu/aws-isucon
-  description = "AMI ID of stand alone instance"
+  default = "isuconXX-qualify"
+  description = "AMI Name of stand alone instance"
+}
+
+variable "standalone_ami_owner" {
+  type = string
+  default = "839726181030" # owner of https://github.com/matsuu/aws-isucon
+  description = "Owner of the stand alone AMI"
 }
 
 variable "access_cidr_blocks" {

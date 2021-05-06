@@ -4,9 +4,9 @@ resource "aws_key_pair" "participant-key" {
 }
 
 resource "aws_instance" "participant-instance" {
+  ami = data.aws_ami.standalone_ami.id
   count = length(var.names)
   instance_type = "t3.micro"
-  ami = var.standalone_ami_id
   subnet_id = var.subnet_id
   associate_public_ip_address = true
   key_name = aws_key_pair.participant-key.id

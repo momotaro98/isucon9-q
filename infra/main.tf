@@ -37,7 +37,8 @@ module "sg" {
 
 module "participant-ec2" {
   source = "./modules/ec2"
-  standalone_ami_id = var.standalone_ami_id
+  standalone_ami_name = var.standalone_ami_name
+  standalone_ami_owner = var.standalone_ami_owner
   subnet_id = module.subnet.subnet_id
   security_group_id = module.sg.security_group_id
 }
