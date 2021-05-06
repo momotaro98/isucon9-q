@@ -13,7 +13,6 @@
     - nginx
     - mysql
     - golang
-    - perl
     - webapp.nginx
     - webapp.mysql
     - webapp.golang

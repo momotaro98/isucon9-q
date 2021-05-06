@@ -11,7 +11,18 @@ build {
   sources = [
     "source.amazon-ebs.ubuntu-amd64"
   ]
-  provisioner "ansible" {
-    playbook_file = "./standalone.yml"
+
+  provisioner "shell" {
+    inline = [
+      "export DEBIAN_FRONTEND=noninteractive",
+      "sudo apt-get update",
+      "sudo apt-get install -y --no-install-recommends ansible",
+    ]
+  }
+
+  provisioner "ansible-local" {
+    playbook_file  = "./standalone.yml"
+    playbook_dir   = "."                 // 必要
+    inventory_file = "./inventory/hosts" // 必要
   }
 }
