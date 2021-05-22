@@ -15,3 +15,14 @@ variable "access_cidr_blocks" {
   default = "0.0.0.0/0" # "0.0.0.0/0,255.255.255.255/32" のようにカンマ区切りで複数指定可
   description = "cidr for access"
 }
+
+variable "ec2_members" {
+  type = map
+  default = {
+    "0" = "worker-01"
+    "1" = "worker-02"
+    "2" = "worker-03"
+    "3" = "benchmark-instance"
+  }
+  description = "EC2 instances for isucon practice"
+}

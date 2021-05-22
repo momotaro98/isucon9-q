@@ -41,4 +41,5 @@ module "participant-ec2" {
   standalone_ami_owner = var.standalone_ami_owner
   subnet_id = module.subnet.subnet_id
   security_group_id = module.sg.security_group_id
+  ec2_members = var.ec2_members
 }

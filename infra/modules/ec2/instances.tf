@@ -5,7 +5,7 @@ resource "aws_key_pair" "participant-key" {
 
 resource "aws_instance" "participant-instance" {
   ami = data.aws_ami.standalone_ami.id
-  count = length(var.names)
+  count = length(var.ec2_members)
   instance_type = "t3.micro"
   subnet_id = var.subnet_id
   associate_public_ip_address = true
@@ -20,6 +20,6 @@ resource "aws_instance" "participant-instance" {
   # }
 
   tags = {
-    Name = format("isucon-%s", lookup(var.names, count.index))
+    Name = format("isucon-%s", lookup(var.ec2_members, count.index))
   }
 }
