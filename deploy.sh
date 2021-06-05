@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $HOME/.bash_profile $HOME/.bashrc
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 echo 'Restarting Go...'
