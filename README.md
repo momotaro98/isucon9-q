@@ -48,6 +48,19 @@ $ ./bin/benchmarker
 
 Version: Go 1.13 or later
 
+### [My Note] Run Bench and serve shipment and payment external APIs in isolated EC2
+
+AWS上のアプリサーバ(3台)とは別にベンチマーク兼外部API(支払い・出荷API)を受けもつEC2を練習用に立てている。
+
+そのEC2からベンチマークできるようにした。そのときのベンチマーカーのオプション。
+
+```bash
+APP_SERVER=http://10.1.0.12; ./bin/benchmarker \
+  -target-url ${APP_SERVER} \
+  -payment-url http://$(hostname -i)/bench/payment/ \
+  -shipment-url http://$(hostname -i)/bench/shipment/
+```
+
 ### 実行オプション
 
 ```
