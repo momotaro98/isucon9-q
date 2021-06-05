@@ -17,7 +17,7 @@ sudo cp $DIR/systemd/* /etc/systemd/system/
 sudo systemctl daemon-reload
 
 echo 'Updating config file...'
-sudo cp "$DIR/nginx.conf/nginx.conf" /etc/nginx/nginx.conf
+sudo cp "$DIR/nginx.conf" /etc/nginx/nginx.conf
 # sudo cp "$HOME/redis.conf" /etc/redis/redis.conf
 # sudo cp "$HOME/my.conf" /etc/mysql/my.cnf
 echo 'Updated config file!'
