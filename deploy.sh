@@ -4,9 +4,6 @@ source $HOME/.bash_profile $HOME/.bashrc
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-echo 'copy env.sh'
-cp $DIR/env.sh /home/isucon/
-
 echo 'Restarting Go...'
 cd $DIR/webapp/go/
 go build -o isucari
