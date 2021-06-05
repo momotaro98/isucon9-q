@@ -473,7 +473,7 @@ func postInitialize(w http.ResponseWriter, r *http.Request) {
 	_, err = dbx.Exec(
 		"INSERT INTO `configs` (`name`, `val`) VALUES (?, ?) ON DUPLICATE KEY UPDATE `val` = VALUES(`val`)",
 		"payment_service_url",
-		ri.PaymentServiceURL,
+		ri.PaymentServiceURL+"/bench/payment/", // [my note] 練習時の工夫
 	)
 	if err != nil {
 		log.Print(err)
@@ -483,7 +483,7 @@ func postInitialize(w http.ResponseWriter, r *http.Request) {
 	_, err = dbx.Exec(
 		"INSERT INTO `configs` (`name`, `val`) VALUES (?, ?) ON DUPLICATE KEY UPDATE `val` = VALUES(`val`)",
 		"shipment_service_url",
-		ri.ShipmentServiceURL,
+		ri.ShipmentServiceURL+"/bench/shipment/", // [my note] 練習時の工夫
 	)
 	if err != nil {
 		log.Print(err)
