@@ -1,4 +1,4 @@
-# isucon9-qualify
+# isucon9-q
 
 ## ディレクトリ構成
 
@@ -7,7 +7,8 @@
 ├── cmd          # ベンチマーカーなどのソースコード
 ├── docs         # 運営が用意した各種ドキュメント
 ├── initial-data # 初期データ作成
-├── provisioning # セットアップ用ansible
+├── provisioning # セットアップ用ansible and packer
+├── infra        # AWSインフラ terraform
 └── webapp       # 各言語の参考実装
 ```
 
@@ -16,8 +17,41 @@
 こちらのblogでも紹介しています。参考にしてください
 http://isucon.net/archives/53805209.html
 
+## [My Note] デプロイスクリプト including service restart and log rotation
+
+### 初回 => すべてのアプリサーバ上で実施
+
+#### Git Clone for this repo
+
+```
+ssh isucon-first-server, 2nd, 3rd server
+sudo su isucon
+cd $HOME
+git clone https://github.com/momotaro98/isucon9-q.git
+```
+
+#### Update `/etc/hosts` for デプロイスクリプト
+
+example like below
+
+```
+# ISUCON
+10.1.0.170 isu2
+10.1.0.37 isu3
+```
+
+### デプロイコマンド => 1つ目のアプリサーバ上で実施
+
+すべてのアプリサーバにデプロイする
+
+```
+ssh isucon-first-server
+/home/isucon/isucon9-q/deploy-with-remote.sh
+```
 
 ## 前準備
+
+### [My Note] 以下はprovisioningのAnsibleで`roles/initial-data`の中で実施される。
 
 ```
 # 初期データ作成

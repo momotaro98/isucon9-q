@@ -1,12 +1,29 @@
 # isucon9 provisioning
 
-ansible 2.8.3のみで動作確認しています。
+> ansible 2.8.3のみで動作確認しています。
 
-# momotaro98's note
+# Overview
 
 __PackerがAnsibleをProvisionerとして使ってAMIを作成する__
 
-# playbooks
+# How to build AMI. 
+
+```
+packer build .
+```
+
+## Packerが使っているファイル
+
+- *.pkr.hcl なファイル
+
+# Ansible playbooks
+
+## 現状使っているもの
+
+- standalone.yml
+  - アプリ、ベンチマーク、外部サービスが一緒になっている
+
+## もともとあったもの
 
 - webapp.yml
   - 競技用
@@ -14,27 +31,3 @@ __PackerがAnsibleをProvisionerとして使ってAMIを作成する__
   - ベンチマーカー用
 - dev.yml
   - 競技者向け開発用の外部サービス
-
-## 競技用サーバのセットアップ
-
-inventory/hostsのwebappセクションに対象のホストを追加してansible-playbookコマンドを実行してください。
-
-```
-ansible-playbook webapp.yml -i inventory/hosts
-```
-
-## ベンチマーカーサーバのセットアップ
-
-inventory/hostsのbenchセクションに対象のホストを追加してansible-playbookコマンドを実行してください。
-
-```
-ansible-playbook bench.yml -i inventory/hosts
-```
-
-## 開発用の外部サービスのセットアップ
-
-inventory/hostsのdevセクションに対象のホストを追加してansible-playbookコマンドを実行してください。
-
-```
-ansible-playbook dev.yml -i inventory/hosts
-```
