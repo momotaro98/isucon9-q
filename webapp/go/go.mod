@@ -1,4 +1,4 @@
-module github.com/isucon/isucon9-qualify/webapp/go
+module github.com/momotaro98/isucon9-q/webapp/go
 
 go 1.12
 
